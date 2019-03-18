@@ -11,7 +11,11 @@ public class SceneManage : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             SceneManager.LoadScene("GameplayScene");
+        }
 
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene("WaitScene");
         }
     }
 }
