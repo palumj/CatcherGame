@@ -14,21 +14,13 @@ public class GameMovement : MonoBehaviour
     //instantiate and destroy to create/destroy falling objects
     //use repeating invoke to repeatedly spawn object
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         movingObject.transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
     private void FixedUpdate()
-    {
+    {//A series of if statements is used because it seemed to work best for smoother movement
         if (Random.value <= directionChangeChance)
         {
             if (Random.value <= directionChangeChance)
@@ -43,6 +35,7 @@ public class GameMovement : MonoBehaviour
             }
         }
 
+        //Bounds of movement for the dropping object
         if (movingObject.transform.position.x < -8f || movingObject.transform.position.x > 8f)
         {
             speed *= -1;

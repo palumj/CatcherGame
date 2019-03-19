@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
-{
+{//Defines player movement with boundaries
     public GameObject playerObject;
 
     [Range(0f, 6f)]
     public float speed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.LeftArrow))

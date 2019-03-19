@@ -9,6 +9,9 @@ public class CollisionDetect : MonoBehaviour
     private int points = 0;
     public Text score;
 
+    int[] highScores = new int[10];
+    string highScoreKey = "";
+
     private int life = 3;
     public Text lives;
 
@@ -18,7 +21,7 @@ public class CollisionDetect : MonoBehaviour
     public AudioClip miss;
 
     void OnTriggerEnter2D(Collider2D other)
-    {
+    {//Handling collisions with the player and the bottom of the screen
         if (gameObject.name == "Player Object")
         {
             points += 10;
@@ -43,9 +46,29 @@ public class CollisionDetect : MonoBehaviour
             SceneManager.LoadScene("LoseScene");
         }
     }
+
     private void Awake()
     {
         score.text = $"Score: {points}";
         lives.text = $"Lives: {life}";
+    }
+
+    void OnDisable()
+    {
+        for (int i = 0; i < highScores.Length; i++)
+        {//Retrieves the score saved in each of 10 spots - creates key if it doesn't exist
+            highScoreKey = "HighScore" + (i + 1).ToString();
+            int highScore = PlayerPrefs.GetInt(highScoreKey, 0);
+            PlayerPrefs.Save();
+
+            //if the current number of points scored is higher than the score saved in a spot, the high score is updated
+            if (points > highScores[i])
+            {
+                int temp = highScore;
+                PlayerPrefs.SetInt(highScoreKey, points);
+                PlayerPrefs.Save();
+                points = temp;
+            }
+        }
     }
 }
